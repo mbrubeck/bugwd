@@ -1,0 +1,26 @@
+{
+  "name": "bugwd",
+  "version": "0.0.0",
+  "description": "Readable URLs with words in place of bug numbers",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mbrubeck/bugwd.git"
+  },
+  "author": "Matt Brubeck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mbrubeck/bugwd/issues"
+  },
+  "homepage": "https://github.com/mbrubeck/bugwd",
+  "dependencies": {
+    "logfmt": "^0.21.0",
+    "express": "^3.4.8"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
