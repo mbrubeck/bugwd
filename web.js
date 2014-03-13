@@ -1,24 +1,40 @@
 // web.js
 var express = require("express");
 var logfmt = require("logfmt");
-var mnemonic = require("./mnemonic.js");
+var mnemonic = require("./public/mnemonic.js");
 var app = express();
+
+// Config
+var bugurl = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
+var prefix = "http://bugwd.com/";
 
 app.use(logfmt.requestLogger());
 
+app.use('/static', express.static(__dirname + '/public'));
+
 app.get("/", function(req, res) {
-  res.send("Hello");
+  res.render("form.jade", {
+    q: "",
+    words: "",
+    link: "",
+    title: "bugwd",
+  });
 });
 
-app.get("/:words", function(req, res) {
-  var words = req.params.words;
+app.get("/:q", function(req, res) {
+  var q = req.params.q;
   try {
-    if (/^[0-9]+$/.test(words)) {
-      res.send("http://bugwd.com/" + mnemonic.encode_int32(words));
+    if (/^[0-9]+$/.test(q)) {
+      var words = mnemonic.encode_int32(+q);
+      res.render("form.jade", {
+        q: q,
+        words: words,
+        link: prefix + words,
+        title: "Bug " + q + " (" + words + ")"
+      });
     } else {
-      var prefix = "https://bugzilla.mozilla.org/show_bug.cgi?id=";
-      var id = mnemonic.decode_int32(words);
-      res.redirect(301, prefix + id);
+      var id = mnemonic.decode_int32(q);
+      res.redirect(301, bugurl + id);
     }
   } catch (e) {
     res.send("Decoding error: " + e);

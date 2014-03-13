@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    script(src="/static/mnemonic.js")
+    style.
+      body {
+        font-family: sans-serif;
+      }
+      input {
+        min-width: 40em;
+      }
+  body
+      table
+        tr
+          td
+            label(for="q") Bug:
+          td
+            form(action="/", method="GET")
+              input#q(value=q)
+        tr
+          td
+            label(for="link") Link:
+          td
+            input#link(value=link, readonly)
+    script.
+      var link = document.getElementById("link");
+      var q = document.getElementById("q");
+
+      function selectLink() {
+        link.focus();
+        link.selectionStart = 0;
+        link.selectionEnd = link.value.length;
+      }
+
+      q.addEventListener("input", function () {
+        var matches = q.value.match(/[0-9]+/);
+        if (!matches.length)
+          return;
+
+        var id = +matches[0];
+        try {
+          var words = mnemonic.encode_int32(+id);
+          if (words)
+            link.value = "http://bugwd.com/" + words;
+        } catch (e) {
+        }
+      }, false);
+
+      q.addEventListener("keypress", function (event) {
+        if (event.keyCode == event.DOM_VK_RETURN) {
+          selectLink();
+          event.preventDefault();
+        }
+      }, false);
+
+      window.addEventListener("load", selectLink, false);
