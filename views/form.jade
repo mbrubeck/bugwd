@@ -17,13 +17,16 @@ html(lang="en")
         display: none;
       }
   body
+    p.
+      Transform boring old bug numbers into short, memorable URLs. Just paste
+      your bug number or bugzilla URL into the form below:
     table
       tr
         td
           label(for="q") Bug:
         td
           form(action="/", method="GET")
-            input#q(value=q, placeholder="Paste a bug number or bugzilla link")
+            input#q(value=q, placeholder="Enter a bug number or bugzilla link")
       tr
         td
           label(for="url") Link:
@@ -92,4 +95,5 @@ html(lang="en")
       q.addEventListener("input", update, false);
       window.addEventListener("load", function () {
         history.replaceState({ q: q.value }, null, document.URL);
+        q.focus();
       }, false);
