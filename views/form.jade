@@ -5,8 +5,24 @@ html(lang="en")
     script(src="/static/mnemonic.js")
     style.
       body {
+        background: white;
+        color: black;
         font-family: sans-serif;
       }
+      :link, :visited {
+        color: darkorange;
+      }
+      ::selection {
+        color: white;
+        background: darkorange; /* Safari */
+      }
+      ::-moz-selection {
+        color: white;
+        background: darkorange; /* Firefox */
+      }
+
+      h1 { font-weight: normal; }
+
       input {
         margin: .25em;
         padding: .25em;
@@ -20,6 +36,7 @@ html(lang="en")
         display: none;
       }
   body
+    h1 Bug Words!
     p.
       Transform boring old bug numbers into short, memorable URLs. Just paste
       your bug number or bugzilla URL into the form below:
