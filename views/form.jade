@@ -8,6 +8,7 @@ html(lang="en")
         background: white;
         color: black;
         font-family: sans-serif;
+        max-width: 50em;
       }
       :link, :visited {
         color: darkorange;
@@ -27,7 +28,7 @@ html(lang="en")
         margin: .25em;
         padding: .25em;
         font-size: 120%;
-        min-width: 40em;
+        min-width: 25em;
       }
       #footer {
         font-size: 80%;
@@ -35,11 +36,15 @@ html(lang="en")
       #link[href=""] {
         display: none;
       }
+      hr {
+        margin: 2em 0;
+      }
   body
     h1 Bug Words!
     p.
       Transform boring old bug numbers into short, memorable URLs. Just paste
-      your bug number or bugzilla URL into the form below:
+      your bug number or bugzilla URL into the form below, then copy and share
+      the new link that appears below it:
     table
       tr
         td
@@ -54,6 +59,7 @@ html(lang="en")
           input#url(value=url, readonly)
           | 
           a#link(href=url) (go)
+    hr
     p Currently works with bugzilla.mozilla.org only.  Future plans include:
     ul
       li Support for other bug tracking sites.
