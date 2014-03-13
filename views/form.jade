@@ -17,26 +17,26 @@ html(lang="en")
         display: none;
       }
   body
-      table
-        tr
-          td
-            label(for="q") Bug:
-          td
-            form(action="/", method="GET")
-              input#q(value=q, placeholder="Paste a bug number or bugzilla link")
-        tr
-          td
-            label(for="url") Link:
-          td
-            input#url(value=url, readonly)
-            | 
-            a#link(href=url) (go)
-      hr
-      p#footer
-        | made by 
-        a(href="http://limpet.net/mbrubeck") Matt Brubeck 
-        | • 
-        a(href="http://github.com/mbrubeck/bugwd")  source code
+    table
+      tr
+        td
+          label(for="q") Bug:
+        td
+          form(action="/", method="GET")
+            input#q(value=q, placeholder="Paste a bug number or bugzilla link")
+      tr
+        td
+          label(for="url") Link:
+        td
+          input#url(value=url, readonly)
+          | 
+          a#link(href=url) (go)
+    hr
+    p#footer
+      | made by 
+      a(href="http://limpet.net/mbrubeck") Matt Brubeck 
+      | • 
+      a(href="http://github.com/mbrubeck/bugwd")  source code
     script.
       var q = document.getElementById("q");
       var url = document.getElementById("url");
