@@ -10,6 +10,9 @@ html(lang="en")
       input {
         min-width: 40em;
       }
+      #footer {
+        font-size: 80%;
+      }
   body
       table
         tr
@@ -17,12 +20,18 @@ html(lang="en")
             label(for="q") Bug:
           td
             form(action="/", method="GET")
-              input#q(value=q)
+              input#q(value=q, placeholder="Paste a bug number or bugzilla link")
         tr
           td
             label(for="link") Link:
           td
             input#link(value=link, readonly)
+      hr
+      p#footer
+        | made by 
+        a(href="http://limpet.net/mbrubeck") Matt Brubeck 
+        | • 
+        a(href="http://github.com/mbrubeck/bugwd")  source code
     script.
       var link = document.getElementById("link");
       var q = document.getElementById("q");
