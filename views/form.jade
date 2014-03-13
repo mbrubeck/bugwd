@@ -8,6 +8,9 @@ html(lang="en")
         font-family: sans-serif;
       }
       input {
+        margin: .25em;
+        padding: .25em;
+        font-size: 120%;
         min-width: 40em;
       }
       #footer {
@@ -34,6 +37,13 @@ html(lang="en")
           input#url(value=url, readonly)
           | 
           a#link(href=url) (go)
+    p Currently works with bugzilla.mozilla.org only.  Future plans include:
+    ul
+      li Support for other bug tracking sites.
+      li Ability to display a list of bugs on a single page.
+      li.
+        Browser extension/userscript to automatically insert bugwd links on
+        other sites.
     hr
     p#footer
       | made by 
