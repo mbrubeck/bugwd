@@ -105,5 +105,9 @@ html(lang="en")
       q.addEventListener("input", update, false);
       window.addEventListener("load", function () {
         history.replaceState({ q: q.value }, null, document.URL);
-        q.focus();
+        if (link.value) {
+          selectLink();
+        } else {
+          q.focus();
+        }
       }, false);
