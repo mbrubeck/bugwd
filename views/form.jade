@@ -13,6 +13,9 @@ html(lang="en")
       #footer {
         font-size: 80%;
       }
+      #link[href=""] {
+        display: none;
+      }
   body
       table
         tr
@@ -23,9 +26,11 @@ html(lang="en")
               input#q(value=q, placeholder="Paste a bug number or bugzilla link")
         tr
           td
-            label(for="link") Link:
+            label(for="url") Link:
           td
-            input#link(value=link, readonly)
+            input#url(value=url, readonly)
+            | 
+            a#link(href=url) (go)
       hr
       p#footer
         | made by 
@@ -33,34 +38,58 @@ html(lang="en")
         | • 
         a(href="http://github.com/mbrubeck/bugwd")  source code
     script.
-      var link = document.getElementById("link");
       var q = document.getElementById("q");
+      var url = document.getElementById("url");
+      var link = document.getElementById("link");
 
       function selectLink() {
-        link.focus();
-        link.selectionStart = 0;
-        link.selectionEnd = link.value.length;
+        url.focus();
+        url.selectionStart = 0;
+        url.selectionEnd = url.value.length;
       }
 
-      q.addEventListener("input", function () {
-        var matches = q.value.match(/[0-9]+/);
-        if (!matches.length)
-          return;
+      function getNumber(str) {
+        var matches = str.match(/[0-9]+/);
+        return matches && +matches[0];
+      }
 
-        var id = +matches[0];
-        try {
-          var words = mnemonic.encode_int32(+id);
-          if (words)
-            link.value = "http://bugwd.com/" + words;
-        } catch (e) {
+      function update() {
+        var id = getNumber(q.value);
+        var words;
+
+        if (id != null) {
+          try {
+            words = mnemonic.encode_int32(+id);
+          } catch (e) {}
         }
-      }, false);
+        if (words) {
+          url.value = link.href = "http://bugwd.com/" + words;
+          document.title = "Bug " + id + " (" + words + ")";
+        } else {
+          url.value = link.href = "";
+          document.title = "bugwd";
+        }
+      }
 
       q.addEventListener("keypress", function (event) {
         if (event.keyCode == event.DOM_VK_RETURN) {
           selectLink();
+          var id = getNumber(q.value);
+          if (id == null)
+            id = "";
+          history.pushState({ q: q.value }, null, "/" + id);
           event.preventDefault();
         }
       }, false);
 
-      window.addEventListener("load", selectLink, false);
+      window.addEventListener("popstate", function (event) {
+        if (event.state && "q" in event.state) {
+          q.value = event.state.q;
+          update();
+        }
+      }, false);
+
+      q.addEventListener("input", update, false);
+      window.addEventListener("load", function () {
+        history.replaceState({ q: q.value }, null, document.URL);
+      }, false);

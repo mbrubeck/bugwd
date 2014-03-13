@@ -16,7 +16,7 @@ app.get("/", function(req, res) {
   res.render("form.jade", {
     q: "",
     words: "",
-    link: "",
+    url: "",
     title: "bugwd",
   });
 });
@@ -29,7 +29,7 @@ app.get("/:q", function(req, res) {
       res.render("form.jade", {
         q: q,
         words: words,
-        link: prefix + words,
+        url: prefix + words,
         title: "Bug " + q + " (" + words + ")"
       });
     } else {
