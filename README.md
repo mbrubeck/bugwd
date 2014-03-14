@@ -1,5 +1,5 @@
-bugwd
-=====
+bugwords
+========
 
 Bugwd makes bug IDs easier to remember and to share out loud (in a meeting or
 phone call, for example) by replacing numeric IDs with a sequence of words.

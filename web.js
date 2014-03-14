@@ -17,7 +17,7 @@ app.get("/", function(req, res) {
     q: "",
     words: "",
     url: "",
-    title: "bugwd",
+    title: "bugwords",
   });
 });
 
