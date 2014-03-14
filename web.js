@@ -23,13 +23,16 @@ app.get("/", function(req, res) {
   });
 });
 
-app.get("/search", function(req, res) {
+function render_search(req, res) {
   var q = req.query.quicksearch || "";
   res.render("search.jade", {
     q: q,
     title: q ? "bugwd: " + q : "bugwords search",
   });
-});
+}
+
+app.get("/search", render_search);
+app.get("/buglist.cgi", render_search);
 
 app.get("/:q", function(req, res) {
   var q = req.params.q;
