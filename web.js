@@ -25,6 +25,13 @@ app.get("/", function(req, res) {
 
 function render_search(req, res) {
   var q = req.query.quicksearch || "";
+  if (/^[a-z]+-[a-z]+-[a-z]+$/.test(q)) {
+    try {
+      var id = mnemonic.decode_int32(q);
+      res.redirect(301, bugurl + id);
+      return;
+    } catch (e) {}
+  }
   res.render("search.jade", {
     q: q,
     title: q ? "bugwd: " + q : "bugwords search",
