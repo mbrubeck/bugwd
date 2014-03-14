@@ -1,3 +1,5 @@
+"use strict";
+
 // web.js
 var express = require("express");
 var logfmt = require("logfmt");
@@ -18,6 +20,14 @@ app.get("/", function(req, res) {
     words: "",
     url: "",
     title: "bugwords",
+  });
+});
+
+app.get("/search", function(req, res) {
+  var q = req.query.quicksearch || "";
+  res.render("search.jade", {
+    q: q,
+    title: q ? "bugwd: " + q : "bugwords search",
   });
 });
 

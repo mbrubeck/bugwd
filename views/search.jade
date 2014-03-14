@@ -1,0 +1,90 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    meta(name="viewport", content="width=device-width")
+    script(src="/static/mnemonic.js")
+    link(rel="stylesheet", href="/static/style.css")
+    style.
+      body {
+        max-width: 100%;
+      }
+      .hidden {
+        display: none;
+      }
+      #results {
+        table-layout: fixed;
+        width: 100%;
+      }
+      #results td {
+        padding: 0.5em;
+        vertical-align: top;
+      }
+      #results td:first-child {
+        width: 20em;
+      }
+  body
+    h1 bugwords!
+    form(action="/search", method="GET")
+      p
+        label(for="q") Search:
+        input#q(name="quicksearch", value=q, placeholder="Search using quicksearch syntax")
+        | (
+        a(href="https://bugzilla.mozilla.org/page.cgi?id=quicksearch.html") help
+        | )
+    p#loading.hidden Loading...
+    p#noresults.hidden No results
+    table#results
+    script.
+      "use strict";
+      var prefix = "http://bugwd.com/";
+      var api = "https://bugzilla.mozilla.org/rest/bug";
+      var extra = "&include_fields=id,summary";
+
+      function search(query) {
+        var url = api + query + extra;
+        var loading = document.getElementById("loading");
+        noresults.classList.add("hidden");
+        loading.classList.remove("hidden");
+
+        var req = new XMLHttpRequest();
+        req.open("get", url, true);
+        req.setRequestHeader("Accept", "application/json");
+        req.onload = function() {
+          loading.classList.add("hidden");
+          var result = JSON.parse(this.responseText);
+          if (result.bugs && result.bugs.length) {
+            render(result.bugs);
+          } else {
+            noresults.classList.remove("hidden");
+          }
+        };
+        req.send();
+      }
+
+      function render(bugs) {
+        var frag = document.createDocumentFragment();
+        bugs.forEach(function(bug) {
+          var tr = document.createElement("tr");
+          frag.appendChild(tr);
+          var td = document.createElement("td");
+          tr.appendChild(td);
+
+          var words = mnemonic.encode_int32(+bug.id);
+          var url = prefix + words;
+          var link = document.createElement("a");
+          link.setAttribute("href", url);
+          link.textContent = url;
+          td.appendChild(link);
+
+          td = document.createElement("td");
+          td.textContent = "Bug " + bug.id + " - " + bug.summary;
+          tr.appendChild(td);
+        });
+        document.getElementById("results").appendChild(frag);
+      }
+
+      var query = location.search;
+      if (query) {
+        search(query);
+      }
