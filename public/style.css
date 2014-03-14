@@ -30,6 +30,9 @@ input {
   font-size: 120%;
   min-width: 25em;
 }
+input[type="submit"] {
+  min-width: 3em;
+}
 #footer {
   font-size: 80%;
 }

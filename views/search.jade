@@ -29,18 +29,29 @@ html(lang="en")
     form(action="/search", method="GET")
       p
         label(for="q") Search:
-        input#q(name="quicksearch", value=q, placeholder="Search using quicksearch syntax")
-        | (
+        input#q(name="quicksearch", value=q, placeholder="You can use quicksearch syntax like \"@mbrubeck\"")
+        input(type="Submit" value="Go")
+        |  (
         a(href="https://bugzilla.mozilla.org/page.cgi?id=quicksearch.html") help
         | )
     p#loading.hidden Loading...
     p#noresults.hidden No results
     table#results
     hr
-    p#footer.
-      Tip: You can turn a regular bugzilla.mozilla.org search into a bugwd search
-      by replacing "https://bugzilla.mozilla.org" with "http://bugwd.com" in
-      the address.
+    #footer
+      p.
+        Tip: You can turn a regular bugzilla.mozilla.org search into a bugwd
+        search by replacing "https://bugzilla.mozilla.org" with
+        "http://bugwd.com" in the address.
+      p.
+        In Firefox, right-click on the search box and "Add a keyword for this
+        search" if you want to use bugwords to search from your address bar!
+      hr
+      p
+        | made by 
+        a(href="http://limpet.net/mbrubeck") Matt Brubeck 
+        | • 
+        a(href="http://github.com/mbrubeck/bugwd")  source code
     script.
       "use strict";
       var prefix = "http://bugwd.com/";
