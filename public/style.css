@@ -1,0 +1,35 @@
+body {
+  background: white;
+  color: black;
+  font-family: sans-serif;
+  max-width: 50em;
+}
+:link, :visited {
+  color: rgba(237, 93, 15, 1);
+}
+::selection {
+  color: white;
+  background: rgba(237, 93, 15, 1); /* Safari */
+}
+::-moz-selection {
+  color: white;
+  background: rgba(237, 93, 15, 1); /* Firefox */
+}
+
+h1 { font-weight: normal; }
+
+input {
+  margin: .25em;
+  padding: .25em;
+  font-size: 120%;
+  min-width: 25em;
+}
+#footer {
+  font-size: 80%;
+}
+#link[href=""] {
+  display: none;
+}
+hr {
+  margin: 2em 0;
+}
