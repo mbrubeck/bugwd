@@ -21,7 +21,7 @@ html(lang="en")
         vertical-align: top;
       }
       #results td:first-child {
-        width: 20em;
+        width: 11em;
       }
   body
     h1
@@ -80,7 +80,7 @@ html(lang="en")
           var url = prefix + words;
           var link = document.createElement("a");
           link.setAttribute("href", url);
-          link.textContent = url;
+          link.textContent = words;
           td.appendChild(link);
 
           td = document.createElement("td");
