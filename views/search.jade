@@ -21,7 +21,7 @@ html(lang="en")
         vertical-align: top;
       }
       #results td:first-child {
-        width: 11em;
+        width: 10em;
       }
   body
     h1
@@ -95,7 +95,7 @@ html(lang="en")
           td.appendChild(link);
 
           td = document.createElement("td");
-          td.textContent = "Bug " + bug.id + " - " + bug.summary;
+          td.textContent = bug.summary + " (bug " + bug.id + ")";
           tr.appendChild(td);
         });
         document.getElementById("results").appendChild(frag);
