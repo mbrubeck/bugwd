@@ -126,6 +126,9 @@ html(lang="en")
       }, false);
 
       q.addEventListener("input", update, false);
+
+      url.addEventListener("click", selectLink, false);
+
       window.addEventListener("load", function () {
         history.replaceState({ q: q.value }, null, document.URL);
         if (url.value) {
