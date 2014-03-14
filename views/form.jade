@@ -6,7 +6,8 @@ html(lang="en")
     script(src="/static/mnemonic.js")
     link(rel="stylesheet", href="/static/style.css")
   body
-    h1 bugwords!
+    h1
+      a(href="/") bugwords!
     p.
       Transform boring old bug numbers into short, memorable URLs. Just paste
       your bug number or bugzilla URL into the form below, then copy and share
@@ -25,6 +26,10 @@ html(lang="en")
           input#url(value=url, readonly)
           | 
           a#link(href=url) (go)
+    p
+      | You can also look up multiple bugs using the  
+      a(href="/search") search form
+      | .
     hr
     p Currently works with bugzilla.mozilla.org only.  Future plans include:
     ul

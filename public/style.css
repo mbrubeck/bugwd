@@ -16,7 +16,13 @@ body {
   background: rgba(237, 93, 15, 1); /* Firefox */
 }
 
-h1 { font-weight: normal; }
+h1 {
+  font-weight: normal;
+}
+h1 :link, h1 :visited {
+  color: inherit;
+  text-decoration: none;
+}
 
 input {
   margin: .25em;

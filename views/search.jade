@@ -24,7 +24,8 @@ html(lang="en")
         width: 20em;
       }
   body
-    h1 bugwords!
+    h1
+      a(href="/") bugwords!
     form(action="/search", method="GET")
       p
         label(for="q") Search:
@@ -35,11 +36,16 @@ html(lang="en")
     p#loading.hidden Loading...
     p#noresults.hidden No results
     table#results
+    hr
+    p#footer.
+      Tip: You can turn a regular bugzilla.mozilla.org search into a bugwd search
+      by replacing "https://bugzilla.mozilla.org" with "http://bugwd.com" in
+      the address.
     script.
       "use strict";
       var prefix = "http://bugwd.com/";
       var api = "https://bugzilla.mozilla.org/rest/bug";
-      var extra = "&include_fields=id,summary";
+      var extra = "&include_fields=id,summary&limit=400";
 
       function search(query) {
         var url = api + query + extra;
